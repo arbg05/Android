@@ -1,0 +1,576 @@
+!Clay thrower
+!Edited by Arun
+!10/19/2015
+!Notes
+!
+!
+
+! Define the various UUIDs
+blueRadiosUUID$ = "DA2B84F1-6279-48DE-BDC0-AFBEA0226079"
+infoUUID$ = "99564A02-DC01-4D3C-B04E-3BB1EF0571B2"
+modeUUID$ = "A87988B9-694C-479C-900E-95DFA6C00A24"
+rxUUID$ = "BF03260C-7205-4C25-AF43-93B1C299D159"
+txUUID$ = "18CDA784-4BD3-4370-85BB-BFED91EC86AF"
+
+debug% = 1
+
+! Set up variables to hold the peripheral and the characteristics
+DIM blueRadiosPeripheral AS BLEPeripheral
+
+! We will look for these services.
+DIM servicesHeader AS STRING, services(1) AS STRING, serviceUUID(1) AS STRING
+servicesHeader = "-0451-4000-B000-000000000000"
+services(1) = "FFE1"
+serviceUUID(1) = "FFE0"
+accel% = 1
+
+! Start the BLE service and begin scanning for devices.
+BLE.startBLE
+DIM uuid(0) AS STRING
+BLE.startScan(uuid)
+
+
+DIM zTemp AS INTEGER
+zTemp = 1
+
+! Create the controls.
+DIM readButton AS Button
+DIM doButton AS Button
+DIM getButton AS Button
+DIM endifButton AS Button
+DIM putButton AS Button
+DIM ifButton AS Button
+DIM ifLessThan AS Button
+DIM sleepButton AS Button
+DIM pullButton AS Button
+DIM programButton AS Button
+
+! Create a text field.
+DIM outputVal AS TextField
+DIM getVal AS TextField
+DIM putVal1 AS TextField
+DIM putVal2 AS TextField
+DIM ifVal1 AS TextField
+DIM ifVal2 AS TextField
+DIM sleepVal AS TextField
+DIM programVal AS TextField
+output = 0
+commandmode=0
+pullmode=0
+readmode=0
+line$ = "quiet\n"
+data$ = ""
+
+Graphics.setPixelGraphics(0)
+
+! Set up the GUI.
+DIM title1 AS Label
+
+title1 = Graphics.newLabel(20, 18, Graphics.width - 40, 50)
+title1.setText("REKAM1")
+title1.setAlignment(2)
+title1.setFont("Arial", 36, 1)
+
+
+readButton = Graphics.newButton(Graphics.width - 600, Graphics.height - 850, 100, 50)
+readButton.setTitle("read")
+readButton.setEnabled(1)
+readButton.setBackgroundColor(1, 1, 1)
+readButton.setGradientColor(0.6, 0.6, 0.6)
+
+outputVal = Graphics.newTextField(Graphics.width - 470, Graphics.height - 840, 200)
+outputVal.setBackgroundColor(0.8, 0.8, 0.8)
+outputVal.setText("ENTER A COMMAND")
+
+doButton = Graphics.newButton(Graphics.width - 230, Graphics.height - 850, 100, 50)
+doButton.setTitle("do")
+doButton.setEnabled(1)
+doButton.setBackgroundColor(1, 1, 1)
+doButton.setGradientColor(0.6, 0.6, 0.6)
+
+getButton = Graphics.newButton(Graphics.width - 600, Graphics.height - 780, 100, 50)
+getButton.setTitle("get")
+getButton.setEnabled(1)
+getButton.setBackgroundColor(1, 1, 1)
+getButton.setGradientColor(0.6, 0.6, 0.6)
+
+
+getVal = Graphics.newTextField(Graphics.width - 400, Graphics.height - 770, 60)
+getVal.setBackgroundColor(0.8, 0.8, 0.8)
+getVal.setText("7")
+
+endifButton = Graphics.newButton(Graphics.width - 230, Graphics.height - 780, 100, 50)
+endifButton.setTitle("endif")
+endifButton.setEnabled(1)
+endifButton.setBackgroundColor(1, 1, 1)
+endifButton.setGradientColor(0.6, 0.6, 0.6)
+
+putButton = Graphics.newButton(Graphics.width - 600, Graphics.height - 710, 100, 50)
+putButton.setTitle("put")
+putButton.setEnabled(1)
+putButton.setBackgroundColor(1, 1, 1)
+putButton.setGradientColor(0.6, 0.6, 0.6)
+
+putVal1 = Graphics.newTextField(Graphics.width - 400, Graphics.height - 700, 60)
+putVal1.setBackgroundColor(0.8, 0.8, 0.8)
+putVal1.setText("14")
+
+putVal2 = Graphics.newTextField(Graphics.width - 230, Graphics.height - 700, 60)
+putVal2.setBackgroundColor(0.8, 0.8, 0.8)
+putVal2.setText("100")
+
+ifButton = Graphics.newButton(Graphics.width - 600, Graphics.height - 640, 100, 50)
+ifButton.setTitle("if")
+ifButton.setEnabled(1)
+ifButton.setBackgroundColor(1, 1, 1)
+ifButton.setGradientColor(0.6, 0.6, 0.6)
+
+ifVal1 = Graphics.newTextField(Graphics.width - 400, Graphics.height - 630, 60)
+ifVal1.setBackgroundColor(0.8, 0.8, 0.8)
+ifVal1.setText("6")
+
+ifLessThan = Graphics.newButton(Graphics.width - 300, Graphics.height - 640, 50, 50)
+ifLessThan.setTitle("<")
+ifLessThan.setEnabled(1)
+ifLessThan.setFocus(0)
+ifLessThan.setBackgroundColor(1, 1, 1)
+ifLessThan.setGradientColor(0.6, 0.6, 0.6)
+
+ifVal2 = Graphics.newTextField(Graphics.width - 230, Graphics.height - 630, 60)
+ifVal2.setBackgroundColor(0.8, 0.8, 0.8)
+ifVal2.setText("10")
+
+sleepButton = Graphics.newButton(Graphics.width - 600, Graphics.height - 570, 100, 50)
+sleepButton.setTitle("sleep")
+sleepButton.setEnabled(1)
+sleepButton.setBackgroundColor(1, 1, 1)
+sleepButton.setGradientColor(0.6, 0.6, 0.6)
+
+sleepVal = Graphics.newTextField(Graphics.width - 400, Graphics.height - 560, 60)
+sleepVal.setBackgroundColor(0.8, 0.8, 0.8)
+sleepVal.setText("50")
+
+programVal = Graphics.newTextField(Graphics.width - 600, Graphics.height - 490, 250)
+programVal.setBackgroundColor(0.8, 0.8, 0.8)
+programVal.setKeyboardAppearance(1)
+
+programButton = Graphics.newButton(Graphics.width - 300, Graphics.height - 500, 100, 50)
+programButton.setTitle("Program")
+programButton.setEnabled(1)
+programButton.setBackgroundColor(1, 1, 1)
+programButton.setGradientColor(0.6, 0.6, 0.6)
+
+pullButton = Graphics.newButton(Graphics.width - 600, Graphics.height - 440, 100, 50)
+pullButton.setTitle("pull")
+pullButton.setEnabled(1)
+pullButton.setBackgroundColor(1, 1, 1)
+pullButton.setGradientColor(0.6, 0.6, 0.6)
+
+! Paint the background gray.
+Graphics.setColor(1, 1, 1)
+Graphics.fillRect(0, 0, Graphics.width, Graphics.height)
+
+! Show the graphics screen.
+System.showGraphics
+END
+
+
+FUNCTION findCharacteristic (uuid AS STRING) AS BLECharacteristic
+! Find the main BlueRadios service.
+DIM availableServices(1) AS BLEService
+availableServices = blueRadiosPeripheral.services
+FOR a = 1 TO UBOUND(availableServices, 1)
+DIM id AS STRING
+id = availableServices(a).UUID
+IF id = serviceUUID(1) THEN
+  ! Find the characteristic.
+  DIM availableCharacteristics(1) AS BLECharacteristic
+  availableCharacteristics = availableServices(a).characteristics
+  FOR c = 1 TO UBOUND(availableCharacteristics, 1)
+    id = availableCharacteristics(c).uuid
+    IF id = services(1) THEN
+      findCharacteristic = availableCharacteristics(c)
+      GOTO 99
+    END IF
+  NEXT
+END IF
+NEXT
+
+PRINT "An expected characteristic was not found."
+!STOP
+
+99:
+END FUNCTION
+
+SUB nullEvent (time AS DOUBLE)
+!      IF connected = 1 THEN
+!        DIM characteristics(1) AS BLECharacteristic
+!  characteristics = blueRadiosPeripheral.characteristics(1)
+!  FOR i = 1 TO UBOUND(characteristics, 1)
+!      ! Found the accelerometer.
+!      IF chacteristics(i).uuid = "FFF1" THEN
+!          blueRadiosPeripheral.readCharacteristic(characteristics(i))
+!      END IF
+!  NEXT
+!      END IF
+
+DIM ch AS BLECharacteristic
+IF readmode = 1 THEN
+ch = findCharacteristic(rxUUID$)
+outputVal.setText(blueRadiosPeripheral.readCharacteristic(ch))
+END IF
+
+IF commandmode = 1 THEN
+DIM line%(LEN(line$) + 1)
+FOR i = 1 TO LEN(line$)
+line%(i) = ASC(MID(line$, i, 1))
+NEXT
+line%(UBOUND(line%, 1)) = 13
+ch = findCharacteristic(rxUUID$)
+blueRadiosPeripheral.writeCharacteristic(ch, line%, 1)
+
+END IF
+
+IF pullmode=1 THEN
+line$ = "put 14 100\n"
+DIM line%(LEN(line$) + 1)
+FOR i = 1 TO LEN(line$)
+line%(i) = ASC(MID(line$, i, 1))
+NEXT
+line%(UBOUND(line%, 1)) = 13
+ch = findCharacteristic(rxUUID$)
+blueRadiosPeripheral.writeCharacteristic(ch, line%, 1)
+
+line$ = "sleep 50\n"
+!line%(LEN(line$) + 1)
+FOR i = 1 TO LEN(line$)
+line%(i) = ASC(MID(line$, i, 1))
+NEXT
+line%(UBOUND(line%, 1)) = 13
+blueRadiosPeripheral.writeCharacteristic(ch, line%, 1)
+
+line$ = "put 14 0\n"
+!line%(LEN(line$) + 1)
+FOR i = 1 TO LEN(line$)
+line%(i) = ASC(MID(line$, i, 1))
+NEXT
+line%(UBOUND(line%, 1)) = 13
+blueRadiosPeripheral.writeCharacteristic(ch, line%, 1)
+
+END IF
+
+IF output = 1 THEN
+!blueRadiosPeripheral.readCharacteristic(ch)
+  outputVal.setText(data$)
+  output = 0
+END IF
+
+END SUB
+
+SUB touchUpInside (ctrl AS Button, time AS DOUBLE)
+
+IF ctrl = readButton THEN
+commandmode=1
+line$ = "read"&"\n"
+END IF
+
+IF ctrl = doButton THEN
+commandmode=1
+line$ = "do"&"\n"
+END IF
+
+IF ctrl = getButton THEN
+commandmode=1
+line$ = "get "& getVal.getText &" \n"
+END IF
+
+IF ctrl = putButton THEN
+commandmode=1
+line$ = "put " & putVal1.getText & " " & putVal2.getText & "\n"
+PRINT line$
+END IF
+
+IF ctrl = ifButton THEN
+commandmode = 1
+line$ = "ifl " & ifVal1.getText & " " & ifVal2.getText & "\n"
+END IF
+
+IF ctrl = sleepButton THEN
+commandmode=1
+line$ = "sleep " & sleepVal.getText & "\n"
+PRINT line$
+END IF
+
+IF ctrl = programButton THEN
+commandmode=1
+line$ = programVal.getText & "\n"
+PRINT line$
+END IF
+
+IF ctrl = pullButton THEN
+pullmode=1
+END IF
+
+END SUB
+
+
+
+
+
+! Called when a peripheral is found. If it is a WMMU, we
+! initiate a connection to it and stop scanning for peripherals.
+!
+! Parameters:
+!    time - The time when the peripheral was discovered.
+!    peripheral - The peripheral that was discovered.
+!    services - List of services offered by the device.
+!    advertisements - Advertisements (information provided by the
+!        device without the need to read a service/characteristic)
+!    rssi - Received Signal Strength Indicator
+!
+SUB BLEDiscoveredPeripheral (time AS DOUBLE, _
+                        peripheral AS BLEPeripheral, _
+                        services() AS STRING, _
+                        advertisements(,) AS STRING, _
+                        rssi)
+IF peripheral.bleName = "CC41-A" THEN
+blueRadiosPeripheral = peripheral
+BLE.connect(blueRadiosPeripheral)
+BLE.stopScan
+END IF
+IF peripheral.bleName = "Simple BLE Peripheral" THEN
+blueRadiosPeripheral = peripheral
+BLE.connect(blueRadiosPeripheral)
+BLE.stopScan
+END IF
+END SUB
+
+! Called to report information about the connection status of the
+! peripheral or to report that services have been discovered.
+!
+! Parameters:
+!    time - The time when the information was received.
+!    peripheral - The peripheral.
+!    kind - The kind of call. One of
+!        1 - Connection completed
+!        2 - Connection failed
+!        3 - Connection lost
+!        4 - Services discovered
+!    message - For errors, a human-readable error message.
+!    err - If there was an error, the Apple error number. If there
+!        was no error, this value is 0.
+!
+SUB BLEPeripheralInfo (time AS DOUBLE, _
+                  peripheral AS BLEPeripheral, _
+                  kind AS INTEGER, _
+                  message AS STRING, _
+                  err AS LONG)
+IF kind = 1 THEN
+! The connection was established. Look for available services.
+IF debug THEN PRINT "Connection made."
+peripheral.discoverServices(uuid)
+ELSE IF kind = 2 OR kind = 3 THEN
+IF debug THEN PRINT "Connection lost: "; kind
+BLE.connect(blueRadiosPeripheral)
+ELSE IF kind = 4 THEN
+! Services were found. If it is one of the ones we are interested
+! in, begin discovery of its characteristics.
+DIM availableServices(1) AS BLEService
+availableServices = peripheral.services
+FOR a = 1 TO UBOUND(availableServices, 1)
+print availableServices(a).uuid
+IF availableServices(a).UUID = "FFE0" THEN
+    peripheral.discoverCharacteristics(uuid, availableServices(a))
+  END IF
+NEXT
+END IF
+END SUB
+
+
+! Called to report information about a characteristic or included
+! services for a service. If it is one we are interested in, start
+! handling it.
+!
+! Parameters:
+!    time - The time when the information was received.
+!    peripheral - The peripheral.
+!    service - The service whose characteristic or included
+!        service was found.
+!    kind - The kind of call. One of
+!        1 - Characteristics found
+!        2 - Included services found
+!    message - For errors, a human-readable error message.
+!    err - If there was an error, the Apple error number. If there
+!        was no error, this value is 0.
+!
+SUB BLEServiceInfo (time AS DOUBLE, _
+              peripheral AS BLEPeripheral, _
+              service AS BLEService, _
+              kind AS INTEGER, _
+              message AS STRING, _
+              err AS LONG)
+IF kind = 1 THEN
+! Get the characteristics.
+DIM characteristics(1) AS BLECharacteristic
+characteristics = service.characteristics
+FOR i = 1 TO UBOUND(characteristics, 1)
+IF service.uuid = "FFE0" AND characteristics(i).uuid = "FFE1" THEN
+! Found the accelerometer.
+print characteristics(i).uuid
+peripheral.setNotify(characteristics(i),1)
+ELSE IF service.uuid = "FFA0" THEN
+SELECT CASE characteristics(i).uuid
+  CASE "FFF1"
+    ! Tell the CC2650 to begin sending data.
+    IF debug THEN PRINT "Write Command"
+    DIM value(1) as INTEGER
+    value(1) = modecode
+
+    peripheral.writeCharacteristic(characteristics(i), value, 1)
+    connected=1
+    !peripheral.setNotify(characteristics(i), 1)
+    peripheral.readCharacteristic(characteristics(i))
+
+  CASE "FFF5"
+  !Used to recieve the actual wmmu fft data
+  IF debug THEN PRINT "RXing FFT Data"
+  DIM RXData(1) as INTEGER
+  !peripheral.setNotify(characteristics(i), 1)
+  peripheral.readCharacteristic(characteristics(i))
+
+  CASE "F000AA12" & servicesHeader
+    ! Turn the accelerometer sensor on.
+    IF debug THEN PRINT "Accelerometer on."
+    DIM value(1) as INTEGER
+    value(1) = 1
+    peripheral.writeCharacteristic(characteristics(i), value, 1)
+
+  CASE "F000AA13" & servicesHeader
+    ! Set the sample rate to 500ms.
+    DIM value(1) as INTEGER
+    value(1) = 50
+    IF debug THEN PRINT "Setting accelerometer sample rate to "; value(1)
+    peripheral.writeCharacteristic(characteristics(i), value, 1)
+
+
+END SELECT
+END IF
+NEXT
+END IF
+END SUB
+
+
+! Called to return information from a characteristic.
+!
+! Parameters:
+!    time - The time when the information was received.
+!    peripheral - The peripheral.
+!    characteristic - The characteristic whose information
+!        changed.
+!    kind - The kind of call. One of
+!        1 - Called after a discoverDescriptors call.
+!        2 - Called after a readCharacteristics call.
+!        3 - Called to report status after a writeCharacteristics
+!            call.
+!    message - For errors, a human-readable error message.
+!    err - If there was an error, the Apple error number. If there
+!        was no error, this value is 0.
+!
+SUB BLECharacteristicInfo (time AS DOUBLE, peripheral AS BLEPeripheral, characteristic AS BLECharacteristic, kind AS INTEGER, message AS STRING, err AS LONG)
+IF kind = 2 THEN
+DIM ch AS BLECharacteristic
+DIM value(1) AS INTEGER
+value = characteristic.value
+SELECT CASE characteristic.uuid
+  CASE infoUUID$
+    ! The device returned the initial information.
+    DIM value(0) AS INTEGER
+    value = characteristic.value
+    IF debug% THEN
+      PRINT "Info: "
+    END IF
+    IF (value(1) BITAND $02) = $02 THEN
+      ! Start watching for data from the device.
+      ch = findCharacteristic(txUUID$)
+      peripheral.setNotify(ch, 1)
+
+      ! Set the mode to remote command mode.
+      ! value = [2]
+      value = [1]
+      ch = findCharacteristic(modeUUID$)
+      peripheral.writeCharacteristic(ch, value, 1)
+    ELSE
+      PRINT "This device does not support terminal mode."
+      STOP
+    END IF
+
+  CASE txUUID$
+    ! The device sent back information via TX.
+    data% = characteristic.value
+    data$ = ""
+    FOR i = 1 TO UBOUND(data%, 1)
+      IF data%(i) <> 13 THEN
+        data$ = data$ & CHR(data%(i))
+      END IF
+    NEXT
+    shared_value = 0
+    PRINT data$
+
+  CASE modeUUID$
+    ! The device sent back the mode.
+    data% = characteristic.value
+    IF debug% THEN
+      PRINT "Mode: "; data%(1)
+    END IF
+
+  CASE services(1)
+
+    !value from Ble
+    data$=""
+    data% = characteristic.value
+    FOR i = 1 TO UBOUND(data%, 1)
+      IF data%(i) <> 13 THEN
+        data$ = data$ & CHR(data%(i))
+      END IF
+    NEXT
+    IF commandmode = 1 THEN
+      commandmode = 0
+      output = 1
+    END IF
+
+    IF pullmode = 1 THEN
+      pullmode = 0
+      output = 1
+    END IF
+    outputVal.setText(data$)
+
+    IF debug% THEN
+      PRINT "Mode: "&data$
+    END IF
+
+
+  CASE ELSE
+    PRINT "Unexpected value from "; characteristic.uuid; ": ";
+
+END SELECT
+ELSE IF kind = 3 THEN
+! Write response recieved.
+IF debug% THEN
+  r$ = "Response from characteristic " & characteristic.uuid
+  r$ = r$ & " with error code " & STR(err)
+  PRINT r$
+END IF
+
+! All write responses indicate we can accept a new command. Set the
+! flag, but be sure and wait a short time for other response pieces to
+! arrive.
+IF characteristic.uuid = services(1) THEN
+  ! The mode has been set.
+  IF debug% THEN
+    peripheral.readCharacteristic(characteristic)
+  END IF
+END IF
+commandsAllowed = 1
+commandTime = time + delay
+END IF
+END SUB
