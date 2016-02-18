@@ -2,8 +2,8 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="60dp"
-    android:padding="10dp"
+    android:layout_height="@dimen/listview_item_height"
+    android:padding="@dimen/listview_item_padding"
     android:background="@android:color/transparent"
     android:gravity="center">
 
@@ -13,15 +13,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:textColor="#ffffff"
-        android:textSize="20sp" />
+        android:textSize="@dimen/text_size" />
 
     <ImageView
         android:id="@+id/icon"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="@dimen/image_width"
+        android:layout_height="@dimen/image_height"
         android:layout_centerInParent="true"
-        android:contentDescription="desc"
-        android:src="@mipmap/ic_launcher" />
+        android:contentDescription="tempicon"
+        android:src="@drawable/placeholder" />
 
     <TextView
         android:id="@+id/tempval"
@@ -29,6 +29,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:textColor="#ffffff"
-        android:textSize="20sp" />
+        android:textSize="@dimen/text_size" />
 
 </RelativeLayout>

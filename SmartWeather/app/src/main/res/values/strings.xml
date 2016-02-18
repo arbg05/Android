@@ -2,5 +2,9 @@
     <string name="app_name">Smart Weather</string>
 
     <string name="ambient_temperature">Ambient Temperature</string>
+    <string name="sensor_not_available">Temperature Sensor not available.</string>
     <string name="action_show_fahrenheit">Show in Fahrenheit</string>
+    <string name="action_show_celsius">Show in Celsius</string>
+    <string name="celsius">C</string>
+    <string name="fahrenheit">F</string>
 </resources>

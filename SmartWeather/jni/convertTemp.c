@@ -5,12 +5,15 @@
 #include <jni.h>
 #include <math.h>
 
-JNIEXPORT jfloatArray JNICALL Java_utd_smartweather_WeatherActivity_convertTemp(JNIEnv* env, jobject obj, jfloatArray oldArray, jint size, jboolean isShowingFahrenheit){
+//JNI fucntion convertTemp
+// params: jfloatArray oldArray, jint size, jboolean convertToFahrenheit
+// return: jfloatArray with converted values of temperature
+JNIEXPORT jfloatArray JNICALL Java_utd_smartweather_ui_WeatherActivity_convertTemp(JNIEnv* env, jobject obj, jfloatArray oldArray, jint size, jboolean convertToFahrenheit){
     jfloat *body = (*env)->GetFloatArrayElements(env, oldArray, 0);
     jfloatArray jArray;
     jArray = (*env)->NewFloatArray(env, size);
     jfloat newVals[size];
-    if(isShowingFahrenheit){
+    if(convertToFahrenheit){
         int i=0;
         for(i=0;i<size;i++){
             newVals[i] = body[i] + 32;

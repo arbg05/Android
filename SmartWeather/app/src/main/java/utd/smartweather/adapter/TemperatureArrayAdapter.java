@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import utd.smartweather.R;
-import utd.smartweather.WeatherActivity;
+import utd.smartweather.ui.WeatherActivity;
 
 
 /**
@@ -21,12 +21,14 @@ public class TemperatureArrayAdapter extends ArrayAdapter<Weather> {
     Context context;
     int layoutResourceId;
     Weather data[] = null;
+    boolean isShowingFahrenheit = false;
 
-    public TemperatureArrayAdapter(Context context, int layoutResourceId, Weather[] data) {
+    public TemperatureArrayAdapter(Context context, int layoutResourceId, Weather[] data, boolean isShowingFahrenheit) {
         super(context, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
         this.data = data;
+        this.isShowingFahrenheit = isShowingFahrenheit;
     }
 
     @Override
@@ -34,8 +36,7 @@ public class TemperatureArrayAdapter extends ArrayAdapter<Weather> {
         View row = convertView;
         TemperatureHolder holder = null;
 
-        if(row == null)
-        {
+        if(row == null){
             LayoutInflater inflater = ((Activity)context).getLayoutInflater();
             row = inflater.inflate(layoutResourceId, parent, false);
 
@@ -45,26 +46,22 @@ public class TemperatureArrayAdapter extends ArrayAdapter<Weather> {
             holder.txtValue = (TextView)row.findViewById(R.id.tempval);
 
             row.setTag(holder);
-        }
-        else
-        {
+        } else {
             holder = (TemperatureHolder)row.getTag();
         }
 
         Weather weather = data[position];
         holder.txtDay.setText(weather.day);
         holder.imgIcon.setImageResource(weather.icon);
-        if(!WeatherActivity.isShowInFahrenheitChecked()) {
-            holder.txtValue.setText(String.valueOf((int)weather.tempVal) + " C");
-        }else {
-            holder.txtValue.setText(String.valueOf((int)weather.tempVal) + " F");
+        if(!isShowingFahrenheit) {
+            holder.txtValue.setText(String.valueOf((int)weather.tempVal) +" "+ context.getString(R.string.celsius));
+        } else {
+            holder.txtValue.setText(String.valueOf((int)weather.tempVal) +" "+ context.getString(R.string.fahrenheit));
         }
-
         return row;
     }
 
-    static class TemperatureHolder
-    {
+    static class TemperatureHolder {
         TextView txtDay;
         ImageView imgIcon;
         TextView txtValue;
