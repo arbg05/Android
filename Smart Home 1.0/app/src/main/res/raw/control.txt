@@ -1,0 +1,28 @@
+BLE CC41-A OpenDoor
+read
+put 14 100
+sleep 50
+put 14 0
+do
+
+BLE CC41-A CloseDoor
+read
+put 14 0
+sleep 50
+put 14 100
+do
+
+BLE SimpleBLEPeripheral OpenDoor
+put 19 100
+sleep 500
+put 19 0
+
+BLE HC-06 CloseDoor
+put 18 100
+sleep 500
+put 18 0
+
+BLE SimpleBLEPeripheral OpenDoor
+put 19 100
+sleep 500
+put 19 0

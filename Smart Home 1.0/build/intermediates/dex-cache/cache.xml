@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\Arun\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-v4\18.0.0\support-v4-18.0.0.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="44ec51e9d395a47aab135e5e1b556c0007442156">
+        <dex dex="C:\Users\Arun\UTD\Fall 2015\Kickstarter\Leo\Android\BLE Sample\Smart Home 1.0\app\build\intermediates\pre-dexed\debug\support-v4-18.0.0-d6d0b2d9e7701f73e85c8e05edca664c6620627e.jar" />
+    </item>
+
+</items>
