@@ -4,15 +4,41 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <TextView
+        android:id="@+id/deviceType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Device Type: BLE" >
+    </TextView>
+
     <EditText
-        android:id="@+id/editControlText"
+        android:id="@+id/editTextDeviceName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:hint="Insert control data here" >
+        android:hint="Insert your device name" >
 
         <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/editTextDeviceFunctionName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Insert your function name" >
+    </EditText>
+
+    <EditText
+        android:id="@+id/editTextCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Insert your code name" >
     </EditText>
 
     <Button

@@ -34,13 +34,14 @@ package com.utd.smarthome.ui;
  * limitations under the License.
  */
 
+import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -57,10 +58,14 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -82,6 +87,7 @@ public class MainActivity extends Activity {
 	private UUID readUUID =
 			UUID.fromString("0000ffe1-0000-1000-8000-00805f9b34fb");
     private static final int FILE_SELECT_CODE = 0;
+    private static String FILE_PATH = "";
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -186,7 +192,27 @@ public class MainActivity extends Activity {
           // we register for the contextmneu        
           registerForContextMenu(lv);
         }
-   
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.more_tab_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId())
+        {
+            case R.id.addControlFile:
+                try {
+                    addCotrolFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+        }
+        return true;
+    }
     
    // We want to create a context Menu when the user long click on an item
     @Override
@@ -200,26 +226,64 @@ public class MainActivity extends Activity {
 		Device device =  aAdpt.getItem(aInfo.position);
 		
 		menu.setHeaderTitle("Options for " + device.getDeviceName());
-		menu.add(1, 1, 1, "Details");
-		//menu.add(1, 2, 2, "Delete");
+        menu.add(1, 1, 1, "Edit");
+		menu.add(1, 2, 2, "Details");
+		menu.add(1, 3, 3, "Delete");
 		
 	}
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        writeTextFile();
+    }
+
+    public void writeTextFile() {
+        // add-write text into file
+        try {
+            File file = new File(FILE_PATH);
+
+            // If file does not exists, then create it
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+            for(int i=0;i<deviceList.size();i++){
+                Device d = deviceList.get(i);
+                String deviceDetail = d.getDeviceType().toString()+" "+d.getDeviceName().toString()
+                        +" "+d.getFunctionName().toString()+"\n";
+                String code = d.getCode().toString();
+                bw.write(deviceDetail);
+                bw.write(code+"\n\n");
+            }
+            bw.close();
+            //display file saved message
+            showMessage("Control file save successfully!!");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     // This method is called when user selects an Item in the Context menu
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
+        AdapterContextMenuInfo aInfo = (AdapterContextMenuInfo) item.getMenuInfo();
 		switch (itemId){
             case 1:
-                AdapterContextMenuInfo aInfo = (AdapterContextMenuInfo) item.getMenuInfo();
-                //deviceList.remove(aInfo.position);
+                editDevice(deviceList.get(aInfo.position), aInfo.position);
+                break;
+            case 2:
                 showDetail(deviceList.get(aInfo.position));
+                break;
+            case 3:
+                deviceList.remove(aInfo.position);
                 break;
             default:
                 showMessage("Wrong option selected");
         }
-		AdapterContextMenuInfo aInfo = (AdapterContextMenuInfo) item.getMenuInfo();
-		//deviceList.remove(aInfo.position);
 		aAdpt.notifyDataSetChanged();
 		return true;
 	}
@@ -245,16 +309,15 @@ public class MainActivity extends Activity {
 
 
 	private void initList(String path) throws FileNotFoundException {
-        // We populate the planets
-       
-        /*deviceList.add(new Device("BLE", "CC41-A", "OpenDoor", "put 14 0"));
-		deviceList.add(new Device("BLE", "CC41-A", "OpenDoor", "put 14 100"));*/
+        // We populate the devices
+
         deviceList.clear();
 
         path = path.replace("/mimetype/","");
+        FILE_PATH = path;
         InputStream textFileInputStream = new FileInputStream(new File(path));//getResources().openRawResource(R.raw.control);
         String stext = readTextFile(textFileInputStream);
-		String controlData[] = stext.split("\n\r");
+		String controlData[] = stext.split("[\\n\\r|\\n|\\r]{2}");
 
         for(String deviceData: controlData){
             String line[] = deviceData.trim().split("\\r?\\n");
@@ -294,12 +357,10 @@ public class MainActivity extends Activity {
     
     
     // Handle user click
-    public void addDevice(View view) throws IOException {
+    public void addCotrolFile() throws IOException {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("text/plain");
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-
-
         try {
             startActivityForResult(
                     Intent.createChooser(intent, "Select txt file"),
@@ -310,6 +371,99 @@ public class MainActivity extends Activity {
                     Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    // Handle user click
+    public void addDevice(View view) {
+        final Dialog d = new Dialog(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        d.setContentView(R.layout.dialog);
+        d.setTitle("Add device");
+        d.setCancelable(true);
+
+        final TextView editDeviceType = (TextView) d.findViewById(R.id.deviceType);
+        final EditText editDeviceName = (EditText) d.findViewById(R.id.editTextDeviceName);
+        final EditText editDeviceFunctionName = (EditText) d.findViewById(R.id.editTextDeviceFunctionName);
+        final EditText editDeviceCode = (EditText) d.findViewById(R.id.editTextCode);
+        String code = "put 14 0\nsleep 50\nput 14 100";
+        editDeviceCode.setText(code);
+        Button b = (Button) d.findViewById(R.id.button1);
+        b.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                String deviceType = editDeviceType.getText().toString();
+                String deviceName = editDeviceName.getText().toString();
+                String deviceFunctionName = editDeviceFunctionName.getText().toString();
+                String deviceCode = editDeviceCode.getText().toString();
+                if ((!deviceName.isEmpty() && !deviceFunctionName.isEmpty() && !deviceCode.isEmpty())) {
+                    MainActivity.this.deviceList.add(new Device(deviceType, deviceName, deviceFunctionName, deviceCode));
+                    MainActivity.this.aAdpt.notifyDataSetChanged(); // We notify the data model is changed
+                    d.dismiss();
+                } else {
+                    builder.setMessage("Should enter all the fields!!")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    //do things
+                                    dialog.cancel();
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+
+                }
+            }
+        });
+
+        d.show();
+    }
+
+    public void editDevice(Device device, final int position) {
+        final Dialog d = new Dialog(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        d.setContentView(R.layout.dialog);
+        d.setTitle("Edit device");
+        d.setCancelable(true);
+
+        final TextView editDeviceType = (TextView) d.findViewById(R.id.deviceType);
+        final EditText editDeviceName = (EditText) d.findViewById(R.id.editTextDeviceName);
+        final EditText editDeviceFunctionName = (EditText) d.findViewById(R.id.editTextDeviceFunctionName);
+        final EditText editDeviceCode = (EditText) d.findViewById(R.id.editTextCode);
+
+        editDeviceType.setText(device.getDeviceType().toString());
+        editDeviceName.setText(device.getDeviceName().toString());
+        editDeviceFunctionName.setText(device.getFunctionName().toString());
+        editDeviceCode.setText(device.getCode().toString());
+
+        Button b = (Button) d.findViewById(R.id.button1);
+        b.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                String deviceType = editDeviceType.getText().toString();
+                String deviceName = editDeviceName.getText().toString();
+                String deviceFunctionName = editDeviceFunctionName.getText().toString();
+                String deviceCode = editDeviceCode.getText().toString();
+                if ((!deviceName.isEmpty() && !deviceFunctionName.isEmpty() && !deviceCode.isEmpty())) {
+                    MainActivity.this.deviceList.set(position, new Device(deviceType, deviceName, deviceFunctionName, deviceCode));
+                    MainActivity.this.aAdpt.notifyDataSetChanged(); // We notify the data model is changed
+                    d.dismiss();
+                } else {
+                    builder.setMessage("Should enter all the fields!!")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    //do things
+                                    dialog.cancel();
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+
+                }
+            }
+        });
+
+        d.show();
     }
 
     //ARUN

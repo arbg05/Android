@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/addControlFile"
+        android:title="Add Control File"/>
+
+</menu>
+<!-- From: file:/C:/Users/Arun/UTD/Fall%202015/Kickstarter/Leo/Android/BLE%20Sample/Smart%20Home%201.0/app/src/main/res/menu/more_tab_menu.xml -->
