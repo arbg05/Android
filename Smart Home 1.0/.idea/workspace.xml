@@ -52,20 +52,20 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/utd/smarthome/ui/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5402685">
-              <caret line="171" column="33" selection-start-line="171" selection-start-column="33" selection-end-line="171" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.62691134">
+              <caret line="140" column="17" selection-start-line="140" selection-start-column="17" selection-end-line="140" selection-end-column="17" />
               <folding>
-                <element signature="e#2655#2663#0" expanded="true" />
-                <element signature="e#3557#3804#0" expanded="true" />
-                <element signature="e#3803#3804#0" expanded="true" />
-                <element signature="e#3855#5369#0" expanded="true" />
-                <element signature="e#5368#5369#0" expanded="true" />
-                <element signature="e#5455#7969#0" expanded="true" />
-                <element signature="e#7968#7969#0" expanded="true" />
-                <element signature="e#17365#18749#0" expanded="true" />
-                <element signature="e#18322#18612#0" expanded="true" />
-                <element signature="e#18611#18612#0" expanded="true" />
-                <element signature="e#18748#18749#0" expanded="true" />
+                <element signature="e#2694#2702#0" expanded="true" />
+                <element signature="e#3596#3843#0" expanded="true" />
+                <element signature="e#3842#3843#0" expanded="true" />
+                <element signature="e#3894#5576#0" expanded="true" />
+                <element signature="e#5575#5576#0" expanded="true" />
+                <element signature="e#5662#8166#0" expanded="true" />
+                <element signature="e#8165#8166#0" expanded="true" />
+                <element signature="e#17562#18946#0" expanded="true" />
+                <element signature="e#18519#18809#0" expanded="true" />
+                <element signature="e#18808#18809#0" expanded="true" />
+                <element signature="e#18945#18946#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -107,21 +107,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BluetoothGatt.java" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-22/android/bluetooth/BluetoothGatt.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.3448277">
-              <caret line="421" column="91" selection-start-line="421" selection-start-column="91" selection-end-line="421" selection-end-column="91" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="BluetoothLeService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/utd/smarthome/ble/BluetoothLeService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.413793">
-              <caret line="285" column="47" selection-start-line="285" selection-start-column="45" selection-end-line="285" selection-end-column="47" />
+            <state vertical-scroll-proportion="-3.7931035">
+              <caret line="114" column="29" selection-start-line="114" selection-start-column="29" selection-end-line="114" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -130,13 +120,13 @@
       <file leaf-file-name="BluetoothHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/utd/smarthome/ble/BluetoothHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.7931035">
-              <caret line="325" column="18" selection-start-line="325" selection-start-column="18" selection-end-line="325" selection-end-column="18" />
+            <state vertical-scroll-proportion="-4.965517">
+              <caret line="273" column="12" selection-start-line="273" selection-start-column="12" selection-end-line="273" selection-end-column="12" />
               <folding>
-                <element signature="e#6412#8263#0" expanded="true" />
-                <element signature="e#8262#8263#0" expanded="true" />
-                <element signature="e#14917#15209#0" expanded="true" />
-                <element signature="e#15208#15209#0" expanded="true" />
+                <element signature="e#6440#8449#0" expanded="true" />
+                <element signature="e#8448#8449#0" expanded="true" />
+                <element signature="e#15130#15422#0" expanded="true" />
+                <element signature="e#15421#15422#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1577,9 +1567,9 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/utd/smarthome/ui/DeviceAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/img_row_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/utd/smarthome/ble/BluetoothLeService.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/utd/smarthome/ble/BluetoothHandler.java" />
         <option value="$USER_HOME$/AppData/Local/Android/sdk/sources/android-22/android/bluetooth/BluetoothGatt.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/utd/smarthome/ui/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/utd/smarthome/ble/BluetoothHandler.java" />
       </list>
     </option>
   </component>
@@ -1952,12 +1942,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1378" height="735" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32871974" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32871974" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3979239" sideWeight="0.4969743" order="3" side_tool="false" content_ui="tabs" />
@@ -1973,7 +1963,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20864947" sideWeight="0.48850575" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20864947" sideWeight="0.48850575" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32871974" sideWeight="0.4969743" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -2040,7 +2030,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/utd/smarthome/ui/MainActivity.java</url>
-          <line>317</line>
+          <line>321</line>
           <properties />
           <option name="timeStamp" value="38" />
         </line-breakpoint>
@@ -2052,13 +2042,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/utd/smarthome/ble/BluetoothHandler.java</url>
-          <line>212</line>
+          <line>216</line>
           <properties />
           <option name="timeStamp" value="46" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/utd/smarthome/ble/BluetoothHandler.java</url>
-          <line>204</line>
+          <line>208</line>
           <properties />
           <option name="timeStamp" value="47" />
         </line-breakpoint>
@@ -2145,17 +2135,17 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#2655#2663#0" expanded="true" />
-            <element signature="e#3557#3804#0" expanded="true" />
-            <element signature="e#3803#3804#0" expanded="true" />
-            <element signature="e#3855#5369#0" expanded="true" />
-            <element signature="e#5368#5369#0" expanded="true" />
-            <element signature="e#5455#7969#0" expanded="true" />
-            <element signature="e#7968#7969#0" expanded="true" />
-            <element signature="e#17365#18749#0" expanded="true" />
-            <element signature="e#18322#18612#0" expanded="true" />
-            <element signature="e#18611#18612#0" expanded="true" />
-            <element signature="e#18748#18749#0" expanded="true" />
+            <element signature="e#2694#2702#0" expanded="true" />
+            <element signature="e#3596#3843#0" expanded="true" />
+            <element signature="e#3842#3843#0" expanded="true" />
+            <element signature="e#3894#5576#0" expanded="true" />
+            <element signature="e#5575#5576#0" expanded="true" />
+            <element signature="e#5662#8166#0" expanded="true" />
+            <element signature="e#8165#8166#0" expanded="true" />
+            <element signature="e#17562#18946#0" expanded="true" />
+            <element signature="e#18519#18809#0" expanded="true" />
+            <element signature="e#18808#18809#0" expanded="true" />
+            <element signature="e#18945#18946#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2209,17 +2199,17 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#2655#2663#0" expanded="true" />
-            <element signature="e#3557#3804#0" expanded="true" />
-            <element signature="e#3803#3804#0" expanded="true" />
-            <element signature="e#3855#5369#0" expanded="true" />
-            <element signature="e#5368#5369#0" expanded="true" />
-            <element signature="e#5455#7969#0" expanded="true" />
-            <element signature="e#7968#7969#0" expanded="true" />
-            <element signature="e#17365#18749#0" expanded="true" />
-            <element signature="e#18322#18612#0" expanded="true" />
-            <element signature="e#18611#18612#0" expanded="true" />
-            <element signature="e#18748#18749#0" expanded="true" />
+            <element signature="e#2694#2702#0" expanded="true" />
+            <element signature="e#3596#3843#0" expanded="true" />
+            <element signature="e#3842#3843#0" expanded="true" />
+            <element signature="e#3894#5576#0" expanded="true" />
+            <element signature="e#5575#5576#0" expanded="true" />
+            <element signature="e#5662#8166#0" expanded="true" />
+            <element signature="e#8165#8166#0" expanded="true" />
+            <element signature="e#17562#18946#0" expanded="true" />
+            <element signature="e#18519#18809#0" expanded="true" />
+            <element signature="e#18808#18809#0" expanded="true" />
+            <element signature="e#18945#18946#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2245,17 +2235,17 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="275" column="10" selection-start-line="275" selection-start-column="10" selection-end-line="275" selection-end-column="10" />
           <folding>
-            <element signature="e#2655#2663#0" expanded="true" />
-            <element signature="e#3557#3804#0" expanded="true" />
-            <element signature="e#3803#3804#0" expanded="true" />
-            <element signature="e#3855#5369#0" expanded="true" />
-            <element signature="e#5368#5369#0" expanded="true" />
-            <element signature="e#5455#7969#0" expanded="true" />
-            <element signature="e#7968#7969#0" expanded="true" />
-            <element signature="e#17365#18749#0" expanded="true" />
-            <element signature="e#18322#18612#0" expanded="true" />
-            <element signature="e#18611#18612#0" expanded="true" />
-            <element signature="e#18748#18749#0" expanded="true" />
+            <element signature="e#2694#2702#0" expanded="true" />
+            <element signature="e#3596#3843#0" expanded="true" />
+            <element signature="e#3842#3843#0" expanded="true" />
+            <element signature="e#3894#5576#0" expanded="true" />
+            <element signature="e#5575#5576#0" expanded="true" />
+            <element signature="e#5662#8166#0" expanded="true" />
+            <element signature="e#8165#8166#0" expanded="true" />
+            <element signature="e#17562#18946#0" expanded="true" />
+            <element signature="e#18519#18809#0" expanded="true" />
+            <element signature="e#18808#18809#0" expanded="true" />
+            <element signature="e#18945#18946#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2480,14 +2470,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/utd/smarthome/ui/DeviceAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="93" column="43" selection-start-line="93" selection-start-column="43" selection-end-line="93" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-22/android/bluetooth/IBluetoothGatt.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
@@ -2518,6 +2500,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-22/android/bluetooth/BluetoothGatt.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20543806">
+          <caret line="421" column="91" selection-start-line="421" selection-start-column="91" selection-end-line="421" selection-end-column="91" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/img_row_layout.xml">
       <provider editor-type-id="android-designer">
         <state />
@@ -2529,51 +2519,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-22/android/bluetooth/BluetoothGatt.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/utd/smarthome/ui/DeviceAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.3448277">
-          <caret line="421" column="91" selection-start-line="421" selection-start-column="91" selection-end-line="421" selection-end-column="91" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="93" column="43" selection-start-line="93" selection-start-column="43" selection-end-line="93" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/utd/smarthome/ble/BluetoothLeService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.413793">
-          <caret line="285" column="47" selection-start-line="285" selection-start-column="45" selection-end-line="285" selection-end-column="47" />
+        <state vertical-scroll-proportion="-3.7931035">
+          <caret line="114" column="29" selection-start-line="114" selection-start-column="29" selection-end-line="114" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/utd/smarthome/ble/BluetoothHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.7931035">
-          <caret line="325" column="18" selection-start-line="325" selection-start-column="18" selection-end-line="325" selection-end-column="18" />
+        <state vertical-scroll-proportion="-4.965517">
+          <caret line="273" column="12" selection-start-line="273" selection-start-column="12" selection-end-line="273" selection-end-column="12" />
           <folding>
-            <element signature="e#6412#8263#0" expanded="true" />
-            <element signature="e#8262#8263#0" expanded="true" />
-            <element signature="e#14917#15209#0" expanded="true" />
-            <element signature="e#15208#15209#0" expanded="true" />
+            <element signature="e#6440#8449#0" expanded="true" />
+            <element signature="e#8448#8449#0" expanded="true" />
+            <element signature="e#15130#15422#0" expanded="true" />
+            <element signature="e#15421#15422#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/utd/smarthome/ui/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5402685">
-          <caret line="171" column="33" selection-start-line="171" selection-start-column="33" selection-end-line="171" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.62691134">
+          <caret line="140" column="17" selection-start-line="140" selection-start-column="17" selection-end-line="140" selection-end-column="17" />
           <folding>
-            <element signature="e#2655#2663#0" expanded="true" />
-            <element signature="e#3557#3804#0" expanded="true" />
-            <element signature="e#3803#3804#0" expanded="true" />
-            <element signature="e#3855#5369#0" expanded="true" />
-            <element signature="e#5368#5369#0" expanded="true" />
-            <element signature="e#5455#7969#0" expanded="true" />
-            <element signature="e#7968#7969#0" expanded="true" />
-            <element signature="e#17365#18749#0" expanded="true" />
-            <element signature="e#18322#18612#0" expanded="true" />
-            <element signature="e#18611#18612#0" expanded="true" />
-            <element signature="e#18748#18749#0" expanded="true" />
+            <element signature="e#2694#2702#0" expanded="true" />
+            <element signature="e#3596#3843#0" expanded="true" />
+            <element signature="e#3842#3843#0" expanded="true" />
+            <element signature="e#3894#5576#0" expanded="true" />
+            <element signature="e#5575#5576#0" expanded="true" />
+            <element signature="e#5662#8166#0" expanded="true" />
+            <element signature="e#8165#8166#0" expanded="true" />
+            <element signature="e#17562#18946#0" expanded="true" />
+            <element signature="e#18519#18809#0" expanded="true" />
+            <element signature="e#18808#18809#0" expanded="true" />
+            <element signature="e#18945#18946#0" expanded="true" />
           </folding>
         </state>
       </provider>

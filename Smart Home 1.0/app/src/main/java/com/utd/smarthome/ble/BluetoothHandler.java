@@ -90,7 +90,7 @@ public class BluetoothHandler implements Serializable{
     };
 
 	public interface OnValidBLEModuleListener{
-		public void onValidBLEModule(boolean isValidBLE);
+		public void onValidBLEModule(boolean isValidBLE) throws InterruptedException;
 	}
     
     public interface OnScanListener{
@@ -197,7 +197,11 @@ public class BluetoothHandler implements Serializable{
                 // Show all the supported services and characteristics on the user interface.
                 //displayGattServices(mBluetoothLEService.getSupportedGattServices());
             	if(mBluetoothLeService != null)
-            		getCharacteristic(mBluetoothLeService.getSupportedGattServices());
+                    try {
+                        getCharacteristic(mBluetoothLeService.getSupportedGattServices());
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
             } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
                 // ���յ������
             	byte[] bytes = intent.getByteArrayExtra(BluetoothLeService.EXTRA_DATA);
@@ -228,7 +232,7 @@ public class BluetoothHandler implements Serializable{
 		onValidBLEModuleListener = l;
 	}
     
-	public void getCharacteristic(List<BluetoothGattService> gattServices){
+	public void getCharacteristic(List<BluetoothGattService> gattServices) throws InterruptedException {
     	this.gattServices = gattServices;
         String uuid = null;
         BluetoothGattCharacteristic characteristic = null;
@@ -267,7 +271,7 @@ public class BluetoothHandler implements Serializable{
         
         if(targetGattCharacteristic != null){
             //Toast.makeText(context, "get character ok", Toast.LENGTH_SHORT).show();
-            //MainActivity.updateOutput(new String(targetGattCharacteristic.getValue()));
+            MainActivity.updateOutput(new String(targetGattCharacteristic.getValue()));
 
 				/*String data = "put 14 100\n";
 				readGattCharacteristic.setValue(data);

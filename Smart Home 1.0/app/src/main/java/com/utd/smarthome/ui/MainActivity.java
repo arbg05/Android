@@ -74,6 +74,8 @@ import com.utd.smarthome.R;
 import com.utd.smarthome.ble.BLEDeviceListAdapter;
 import com.utd.smarthome.ble.BluetoothHandler;
 
+import static java.lang.Thread.sleep;
+
 public class MainActivity extends Activity {
 
 	// The data to show
@@ -113,7 +115,7 @@ public class MainActivity extends Activity {
 
 		bluetoothHandler.setOnValidBLEModuleListener(new BluetoothHandler.OnValidBLEModuleListener() {
             @Override
-            public void onValidBLEModule(boolean isValidBLE) {
+            public void onValidBLEModule(boolean isValidBLE) throws InterruptedException {
                 setValidBLEStatus(isValidBLE);
                 if (isValidBLE) {
                     if (bluetoothHandler.getTargetGattService() != null) {
@@ -131,8 +133,10 @@ public class MainActivity extends Activity {
                                 bleBluetoothReadGattCharacteristic.setValue(list.get(i));
                                 boolean val = MainActivity.bluetoothHandler.getmBluetoothLeService().writeCharacteristic(bleBluetoothReadGattCharacteristic);
                                 //Toast.makeText(getApplicationContext(), "Val: " + val, Toast.LENGTH_SHORT).show();
+                                sleep(500);
                             }
                         }
+                        updateOutput(bleBluetoothReadGattCharacteristic.getValue().toString());
                     }
                 }
             }
@@ -166,10 +170,10 @@ public class MainActivity extends Activity {
                                         device = deviceListAdapter.getItem(i).device;
                                         break;
                                     }
-                                }catch (NullPointerException e){
-                                        e.printStackTrace();
-                                    }
+                                } catch (NullPointerException e) {
+                                    e.printStackTrace();
                                 }
+                            }
                             // connect
                             if (device == null) {
                                 showMessage("No device found!!");
