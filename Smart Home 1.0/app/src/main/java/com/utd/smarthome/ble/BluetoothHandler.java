@@ -202,8 +202,16 @@ public class BluetoothHandler implements Serializable{
                 // ���յ������
             	byte[] bytes = intent.getByteArrayExtra(BluetoothLeService.EXTRA_DATA);
             	//System.out.println("len:"+dataString.length()+"data:"+dataString);
-            	if(onRecListener != null && bytes != null)
-            		onRecListener.onRecievedData(bytes);
+            	if(onRecListener != null && bytes != null) {
+                    onRecListener.onRecievedData(bytes);
+                    String file_string = "";
+
+                    for(int i = 0; i < bytes.length; i++)
+                    {
+                        file_string += (char)bytes[i];
+                    }
+                    MainActivity.updateOutput(file_string);
+                }
             }
         }
     };
@@ -258,7 +266,8 @@ public class BluetoothHandler implements Serializable{
 		}
         
         if(targetGattCharacteristic != null){
-            Toast.makeText(context, "get character ok", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "get character ok", Toast.LENGTH_SHORT).show();
+            //MainActivity.updateOutput(new String(targetGattCharacteristic.getValue()));
 
 				/*String data = "put 14 100\n";
 				readGattCharacteristic.setValue(data);

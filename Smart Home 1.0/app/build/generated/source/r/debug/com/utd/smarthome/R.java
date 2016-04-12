@@ -18,7 +18,7 @@ public final class R {
     }
     public static final class id {
         public static final int addBtn=0x7f080001;
-        public static final int addControlFile=0x7f080009;
+        public static final int addControlFile=0x7f08000a;
         public static final int button1=0x7f080006;
         public static final int deviceType=0x7f080002;
         public static final int editTextCode=0x7f080005;
@@ -27,6 +27,7 @@ public final class R {
         public static final int functionName=0x7f080008;
         public static final int img=0x7f080007;
         public static final int listView=0x7f080000;
+        public static final int output=0x7f080009;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

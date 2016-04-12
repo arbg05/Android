@@ -77,24 +77,24 @@ import com.utd.smarthome.ble.BluetoothHandler;
 public class MainActivity extends Activity {
 
 	// The data to show
-	List<Device> deviceList = new ArrayList<Device>();
-	DeviceAdapter aAdpt;
+	static List<Device> deviceList = new ArrayList<Device>();
+	static DeviceAdapter aAdpt;
 
 	public static BluetoothHandler bluetoothHandler;
 	private boolean isConnected;
 	private boolean isValidBLEModule;
-	private int mWhichDevice = 0;
+	private static int mWhichDevice = 0;
 	private UUID readUUID =
 			UUID.fromString("0000ffe1-0000-1000-8000-00805f9b34fb");
     private static final int FILE_SELECT_CODE = 0;
-    private static String FILE_PATH = "";
+    private static String FILE_PATH = "/storage/emulated/0/Download/control.txt";
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
         //initList();
+
         // We get the ListView component from the layout
         ListView lv = (ListView) findViewById(R.id.listView);
 
@@ -104,12 +104,12 @@ public class MainActivity extends Activity {
 		//ARUN
 		bluetoothHandler = new BluetoothHandler(this);
 		bluetoothHandler.setOnConnectedListener(new BluetoothHandler.OnConnectedListener() {
-			@Override
-			public void onConnected(boolean isConnected) {
-				// TODO Auto-generated method stub
-				setConnectStatus(isConnected);
-			}
-		});
+            @Override
+            public void onConnected(boolean isConnected) {
+                // TODO Auto-generated method stub
+                setConnectStatus(isConnected);
+            }
+        });
 
 		bluetoothHandler.setOnValidBLEModuleListener(new BluetoothHandler.OnValidBLEModuleListener() {
             @Override
@@ -130,7 +130,7 @@ public class MainActivity extends Activity {
                             if (!list.get(i).isEmpty()) {
                                 bleBluetoothReadGattCharacteristic.setValue(list.get(i));
                                 boolean val = MainActivity.bluetoothHandler.getmBluetoothLeService().writeCharacteristic(bleBluetoothReadGattCharacteristic);
-                                Toast.makeText(getApplicationContext(), "Val: " + val, Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getApplicationContext(), "Val: " + val, Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -161,11 +161,15 @@ public class MainActivity extends Activity {
                             BluetoothDevice device = null;
                             BLEDeviceListAdapter deviceListAdapter = bluetoothHandler.getDeviceListAdapter();
                             for (int i = 0; i < deviceListAdapter.getCount(); i++) {
-                                if (deviceListAdapter.getItem(i).device.getName().equals(deviceList.get(position).getDeviceName())) {
-                                    device = deviceListAdapter.getItem(i).device;
-                                    break;
+                                try {
+                                    if (deviceListAdapter.getItem(i).device.getName().equals(deviceList.get(position).getDeviceName())) {
+                                        device = deviceListAdapter.getItem(i).device;
+                                        break;
+                                    }
+                                }catch (NullPointerException e){
+                                        e.printStackTrace();
+                                    }
                                 }
-                            }
                             // connect
                             if (device == null) {
                                 showMessage("No device found!!");
@@ -178,8 +182,6 @@ public class MainActivity extends Activity {
                         public void onScan(BluetoothDevice device, int rssi, byte[] scanRecord) {
                         }
                     });
-					/*((Button) v).setText("scanning");
-					((Button) v).setEnabled(false);*/
                     showMessage("Scanning");
                     bluetoothHandler.scanLeDevice(true);
 
@@ -464,6 +466,11 @@ public class MainActivity extends Activity {
         });
 
         d.show();
+    }
+
+    public static void updateOutput(String data){
+        deviceList.get(mWhichDevice).setOutput(data);
+        aAdpt.notifyDataSetChanged();
     }
 
     //ARUN

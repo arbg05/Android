@@ -36,6 +36,7 @@ public class Device {
 	private String deviceName;
 	private String functionName;
 	private String code;
+    private String output;
 
 	public Device(String deviceType, String deviceName, String functionName, String code) {
 		this.deviceType = deviceType;
@@ -75,6 +76,12 @@ public class Device {
 		this.code = code;
 	}
 
-	
+    public String getOutput() {
+        return output;
+    }
+
+    public void setOutput(String output) {
+        this.output = output;
+    }
 	
 }

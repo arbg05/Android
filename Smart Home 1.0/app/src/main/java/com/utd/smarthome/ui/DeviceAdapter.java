@@ -78,9 +78,11 @@ public class DeviceAdapter extends ArrayAdapter<Device> {
 			v = inflater.inflate(R.layout.img_row_layout, null);
 			// Now we can fill the layout with the right values
 			TextView tv = (TextView) v.findViewById(R.id.functionName);
+			TextView output = (TextView) v.findViewById(R.id.output);
 
 			
 			holder.functionNameView = tv;
+			holder.output = output;
 			
 			v.setTag(holder);
 		}
@@ -89,6 +91,7 @@ public class DeviceAdapter extends ArrayAdapter<Device> {
 		
 		Device p = deviceList.get(position);
 		holder.functionNameView.setText(p.getFunctionName());
+        holder.output.setText(p.getOutput());
 		
 		return v;
 	}
@@ -100,6 +103,7 @@ public class DeviceAdapter extends ArrayAdapter<Device> {
 	
 	private static class DeviceHolder {
 		public TextView functionNameView;
+		public TextView output;
 	}
 
 }

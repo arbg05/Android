@@ -18,4 +18,15 @@
         android:layout_toRightOf="@+id/img"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/output"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignRight="@id/functionName"
+        android:hint="output"
+        android:textColor="@android:color/holo_red_dark"
+        android:textStyle="bold" />
+
 </RelativeLayout>
