@@ -61,6 +61,9 @@ public class BluetoothHandler implements Serializable{
 	                //UUID.fromString("0000fff1-0000-1000-8000-00805f9b34fb");
     private BluetoothGattCharacteristic targetGattCharacteristic = null;
 
+	private int mInterval = 1000; // 1 seconds by default, can be changed later
+	private Handler mOutputHandler;
+
 	public BluetoothGattCharacteristic getReadGattCharacteristic() {
 		return readGattCharacteristic;
 	}
@@ -187,6 +190,9 @@ public class BluetoothHandler implements Serializable{
                 if(onConnectedListener != null){
                 	onConnectedListener.onConnected(true);
                 }
+                if(mOutputHandler != null){
+                    startRepeatingTask();
+                }
             } else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) {
                 mConnected = false;
                 mCurrentConnectedBLEAddr = null;
@@ -271,17 +277,35 @@ public class BluetoothHandler implements Serializable{
         
         if(targetGattCharacteristic != null){
             //Toast.makeText(context, "get character ok", Toast.LENGTH_SHORT).show();
-            MainActivity.updateOutput(new String(targetGattCharacteristic.getValue()));
-
-				/*String data = "put 14 100\n";
-				readGattCharacteristic.setValue(data);
-				boolean val = mBluetoothLeService.writeCharacteristic(readGattCharacteristic);
-				Toast.makeText(context, "Val: "+val, Toast.LENGTH_SHORT).show();*/
+            //MainActivity.updateOutput(new String(targetGattCharacteristic.getValue()));
+			mOutputHandler = new Handler();
+			startRepeatingTask();
         }else{
             Toast.makeText(context, "not support this BLE module", Toast.LENGTH_SHORT).show();
             return ;
         }
-    }  
+    }
+
+	Runnable mStatusChecker = new Runnable() {
+		@Override
+		public void run() {
+			try {
+				MainActivity.updateOutput(new String(targetGattCharacteristic.getValue()));
+			} finally {
+				// 100% guarantee that this always happens, even if
+				// your update method throws an exception
+				mOutputHandler.postDelayed(mStatusChecker, mInterval);
+			}
+		}
+	};
+
+	void startRepeatingTask() {
+		mStatusChecker.run();
+	}
+
+	void stopRepeatingTask() {
+		mOutputHandler.removeCallbacks(mStatusChecker);
+	}
     
 	public void onPause() {
 		// TODO Auto-generated method stub

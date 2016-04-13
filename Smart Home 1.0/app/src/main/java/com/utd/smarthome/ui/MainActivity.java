@@ -56,6 +56,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
+import android.os.Handler;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -90,6 +91,8 @@ public class MainActivity extends Activity {
 			UUID.fromString("0000ffe1-0000-1000-8000-00805f9b34fb");
     private static final int FILE_SELECT_CODE = 0;
     private static String FILE_PATH = "/storage/emulated/0/Download/control.txt";
+
+    BluetoothGattCharacteristic bleBluetoothReadGattCharacteristic = null;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -127,7 +130,7 @@ public class MainActivity extends Activity {
                             temp += "\n";
                             list.set(i, temp);
                         }
-                        BluetoothGattCharacteristic bleBluetoothReadGattCharacteristic = bluetoothHandler.getTargetGattService().getCharacteristic(readUUID);
+                        bleBluetoothReadGattCharacteristic = bluetoothHandler.getTargetGattService().getCharacteristic(readUUID);
                         for (int i = 0; i < list.size(); i++) {
                             if (!list.get(i).isEmpty()) {
                                 bleBluetoothReadGattCharacteristic.setValue(list.get(i));
