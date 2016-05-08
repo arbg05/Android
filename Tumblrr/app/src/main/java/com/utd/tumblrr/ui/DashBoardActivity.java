@@ -13,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.Button;
@@ -337,7 +336,8 @@ public class DashBoardActivity extends AppCompatActivity
         switch (item.getItemId()) {
             case R.id.log_out:
                 resetCreds();
-                finish();
+                initializeAuthenticationView();
+                //finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
